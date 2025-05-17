@@ -24,3 +24,44 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* --- Custom Design Utilities --- */
+
+.btn-primary {
+  @apply bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white font-bold px-6 py-2 rounded-lg shadow-lg transition-all duration-150;
+}
+.btn-secondary {
+  @apply bg-white border border-blue-600 text-blue-700 font-semibold px-6 py-2 rounded-lg shadow-lg transition hover:bg-blue-50;
+}
+.card {
+  @apply bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800;
+}
+.section {
+  @apply py-16 px-4;
+}
+.section-title {
+  @apply text-3xl font-bold text-blue-700 dark:text-blue-300 mb-4;
+}
+.section-desc {
+  @apply text-lg text-gray-700 dark:text-gray-200 mb-8;
+}
+
+/* Responsive image utility */
+.img-responsive {
+  @apply w-full h-auto object-cover rounded-lg;
+}
+
+/* Spacing for cards and sections */
+.card-spacing {
+  @apply mb-8;
+}
+
+/* Typography improvements */
+h1, .h1 { @apply text-4xl sm:text-5xl font-bold mb-4; }
+h2, .h2 { @apply text-3xl font-bold mb-4; }
+h3, .h3 { @apply text-2xl font-bold mb-2; }
+
+/* Subtle hover for cards */
+.card:hover {
+  @apply shadow-xl scale-[1.01] transition-transform duration-150;
+}
