@@ -10,6 +10,13 @@ export default function Head() {
       <link rel="manifest" href="/site.webmanifest" />
       <meta name="theme-color" content="#2563eb" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta property="og:image" content="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=600&q=80" />
+      <meta property="og:image:alt" content="Precision Auto Solutions Logo" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:image" content="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=600&q=80" />
+      <link rel="apple-touch-icon" sizes="180x180" href="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=180&q=80" />
+      <link rel="icon" type="image/png" sizes="32x32" href="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=32&q=80" />
+      <link rel="icon" type="image/png" sizes="16x16" href="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=16&q=80" />
     </>
   );
 } 
