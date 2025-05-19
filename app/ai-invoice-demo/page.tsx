@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function AIInvoiceDemo() {
   const [form, setForm] = useState({ repair: "", vehicle: "", estimate: "" });
-  const [invoice, setInvoice] = useState<null | { range: string; parts: string; labor: string }>(null);
+  const [invoice, setInvoice] = useState<null | { range: string; parts: string; labor: string; details?: string }>(null);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -11,20 +11,16 @@ export default function AIInvoiceDemo() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Mock AI logic: price range is estimate ±15%, split 60% parts, 40% labor
     const est = parseFloat(form.estimate);
     if (isNaN(est) || est <= 0) return;
-    const low = Math.round(est * 0.85);
-    const high = Math.round(est * 1.15);
-    const partsLow = Math.round(low * 0.6);
-    const partsHigh = Math.round(high * 0.6);
-    const laborLow = Math.round(low * 0.4);
-    const laborHigh = Math.round(high * 0.4);
-    setInvoice({
-      range: `$${low} - $${high}`,
-      parts: `$${partsLow} - $${partsHigh}`,
-      labor: `$${laborLow} - $${laborHigh}`,
-    });
+    fetch("http://localhost:8000/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ estimate: est, repair: form.repair, vehicle: form.vehicle }),
+    })
+      .then((res) => res.json())
+      .then((data) => setInvoice(data))
+      .catch(() => setInvoice(null));
   }
 
   return (
@@ -68,6 +64,9 @@ export default function AIInvoiceDemo() {
           <div className="mb-1 text-blue-700 dark:text-blue-300"><strong>Estimated Price Range:</strong> {invoice.range}</div>
           <div className="mb-1 text-gray-700 dark:text-gray-200"><strong>Parts:</strong> {invoice.parts}</div>
           <div className="mb-1 text-gray-700 dark:text-gray-200"><strong>Labor:</strong> {invoice.labor}</div>
+          {invoice.details && (
+            <div className="mt-2 text-xs text-gray-500">{invoice.details}</div>
+          )}
           <div className="mt-2 text-xs text-gray-500">* This is a sample AI-generated estimate for demonstration purposes only.</div>
         </div>
       )}
